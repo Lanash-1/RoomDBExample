@@ -9,8 +9,6 @@ interface StudentDao {
     @Query("SELECT * FROM student_table")
     fun getAll(): List<Student>
 
-    /* @Query("SELECT * FROM student_table WHERE uid IN (:userIds)")
-     fun loadAllByIds(userIds: IntArray): List<Student>*/
 
     @Query("SELECT * FROM student_table WHERE roll_no LIKE :roll LIMIT 1")
     suspend fun findByRoll(roll: Int): Student
@@ -23,5 +21,8 @@ interface StudentDao {
 
     @Query("DELETE FROM student_table")
     suspend fun deleteAll()
+
+    @Query("UPDATE student_table SET first_name=:firstName, last_name=:lastName WHERE roll_no LIKE :rollNo")
+    suspend fun update(firstName: String, lastName: String, rollNo: Int)
 
 }
